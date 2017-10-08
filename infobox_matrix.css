@@ -25,19 +25,16 @@
     padding-top: 100%; 	/* initial ratio of 1:1*/
 }
 
-._box_container ._infobox_1_x_2{
+._box_container ._size_1_x_2{
     max-width: 50%;
     width: 500px;
-    display: inline-block;
     margin: 3% 6% 3% 6% ;
-    background: #cccccc;
-    position: relative;
-    border-radius: 5px;
-    border: 1px dashed;
-    overflow: hidden;
+    --inside-box-dim:  60%;
+    --inside-box-dim_2: 5%;
 }
 
-._box_container ._infobox_1_x_2:before{
+
+._box_container ._size_1_x_2:before{
     content: "";
     display: block;
     padding-top: 50%; 	/* initial ratio of 1:1*/
@@ -54,11 +51,48 @@
     border-radius: 5px;
 }
 
+._box_container ._size_1_x_2 ._inside_box {
+    width: 80%;
+    height: 80%;
+    position: absolute;
+    left: 0;
+    margin: 5% 10% 5% 10%;
+    border: 1px solid;
+    border-radius: 5px;
+}
+
 ._box_container ._infobox ._topbar_inside_box {
     left: calc(50% - var(--inside-box-dim)/2);
     top: calc(-1*(var(--inside-box-dim_2)/2));
     width: var(--inside-box-dim);
     height: var(--inside-box-dim_2);
+    background: #cccccc;
+    position: absolute;
+}
+
+._box_container ._size_1_x_2 ._leftbar_inside_box {
+    left: calc(-1*(var(--inside-box-dim_2)/2));
+    top: calc(50% - var(--inside-box-dim)/2);
+    width: var(--inside-box-dim_2);
+    height: var(--inside-box-dim);
+    background: #cccccc;
+    position: absolute;
+}
+
+._box_container ._size_1_x_2 ._bottombar_inside_box {
+    top: calc(100% - var(--inside-box-dim_2)/2);
+    left: calc(50% - var(--inside-box-dim)/2);
+    width: var(--inside-box-dim);
+    height: var(--inside-box-dim_2);
+    background: #cccccc;
+    position: absolute;
+}
+
+._box_container ._size_1_x_2 ._rightbar_inside_box {
+    left: calc(100% - var(--inside-box-dim_2)/2);
+    top: calc(50% - var(--inside-box-dim)/2);
+    width: var(--inside-box-dim_2);
+    height: var(--inside-box-dim);
     background: #cccccc;
     position: absolute;
 }
