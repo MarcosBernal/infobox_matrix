@@ -10,3 +10,11 @@ Each _infobox is linked to a _modal_popup by their IDs.
 i.e. #name  => #name_popup
 
 The _infobox div can be placed in any part of the html file. However the _modal_popup div should be declared in the root of the body.
+
+
+# Contributions
+
+Many parts of the code have been taken and modified from web sites such as:
+
+- www.w3schools.com
+- stackoverflow.com

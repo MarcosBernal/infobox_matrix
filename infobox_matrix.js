@@ -49,8 +49,16 @@ $(document).ready(function() {
         });
     });
 
-    $("._modal_popup").on("click", function () {
-       $(this).css({display:"none"});
-       $('#'+$(this).attr('id').replace('_popup','')).css({left:$('#'+$(this).attr('id').replace('_popup','')).css("--default-left-position")});
+    $("._modal_popup").on("click", function (e) {
+
+        if(e.target != this) return; //If clicked on child there is not propagation. It should only works with the black border.
+
+        $(this).css({display:"none"});
+        $('#'+$(this).attr('id').replace('_popup','')).css({left:$('#'+$(this).attr('id').replace('_popup','')).css("--default-left-position")});
+    });
+
+    $("._modal_popup-close").on("click", function () {
+        $(this).parent().parent("._modal_popup").css({display:"none"});
+        $('#'+$(this).parent().parent("._modal_popup").attr('id').replace('_popup','')).css({left:$('#'+$(this).parent().parent("._modal_popup").attr('id').replace('_popup','')).css("--default-left-position")});
     });
 });
