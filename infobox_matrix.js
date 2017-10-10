@@ -42,8 +42,15 @@ $(document).ready(function() {
 
     $("._infobox").on("click", function () {
         var position = $(this).offset().left;
-        position = (position < window.outerWidth/2) ? (window.outerWidth - position - $(this).width() -50) : 50;
+        position = $(document).width() - position - $(this).width() -50;
+        $(this).css({"--default-left-position": $(this).css("left")});
+        $(this).animate({left:position}, speed*2, function () {
+            $('#'+$(this).attr('id')+'_popup').css({display:"block"}); //Open Modal popup
+        });
+    });
 
-        $(this).animate({left:position}, speed*2);
+    $("._modal_popup").on("click", function () {
+       $(this).css({display:"none"});
+       $('#'+$(this).attr('id').replace('_popup','')).css({left:$('#'+$(this).attr('id').replace('_popup','')).css("--default-left-position")});
     });
 });
