@@ -184,6 +184,7 @@
     max-width:  105%;
     max-height: 105%;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 ._modal_popup {
@@ -207,6 +208,11 @@
     border: 1px solid var(--secu-theme-color-1);
     width: 80%;
     position: relative;
+}
+
+._modal_popup img {
+    max-width: 70%;
+    max-height: 50%;
 }
 
 /* The Close Button */
