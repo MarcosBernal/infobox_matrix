@@ -16,7 +16,6 @@
 }
 
 
-
 ._box_container{
     margin: 1%;
     padding: 0;
@@ -36,11 +35,7 @@
     --inside-box-dim:  40%;
     --inside-box-dim_2: 5%;
     overflow: hidden;
-
-    --horizontal_slide: 0;
-    -webkit-transform: translate(var(--horizontal_slide),0);
 }
-
 
 ._box_container ._infobox:before{
     content: "";
