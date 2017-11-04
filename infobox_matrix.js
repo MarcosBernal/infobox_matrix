@@ -40,20 +40,54 @@ $(document).ready(function() {
         }, speed);
     });
 
+
+    /*
+     *  When infobox is clicked it is moved to a side of the screen.
+     *  After the movement another html is loaded in the modal_popup. The content loaded is linked by the id ID of the infobox, the id ID_popup
+     *  of the modal popup and the name ID_htmlfile.html of the content.
+     *
+     *  Due to loading limitations the closing management have to be placed in the loading callback. Therefore, when the user wants to close the
+     *  popup all content is unloaded, assigning "" to the div (in case of htmlfile loading).
+     */
     $("._infobox").on("click", function () {
         var position = $(this).offset().left;
         position = $(document).width() - position - $(this).width() -50;
+        var id = $(this).attr('id');
         $(this).css({"--default-left-position": $(this).css("left")});
+
         $(this).animate({left:position}, speed*2, function () {
+            $('#'+id+'_popup').children("._modal_popup-content").load('additional_content/'+id+"_htmlfile.html", function( response, status, xhr ) {
+                if ( status == "error" ) {
+                    //Error or loading within original html
+                    console.log("<DEBUG> Not "+ id +"_htmlfile.html. Perhaps loading from original html??");
+                    console.log("<DEBUG>: -response:" + response + " -status:" + status + ' -data:' + xhr);
+                }
+                else {
+                    $("._modal_popup-close").on("click", function () {
+                        $(this).parent().parent("._modal_popup").css({display: "none"});
+                        $('#' + id).css({left: $('#' + id).css("--default-left-position")});
+                        $('#' + id + '_popup').children("._modal_popup-content").html("");
+                    });
+
+                    $("._modal_popup").on("click", function (e) {
+                        if (e.target != this) return; //If clicked on child there is not propagation. It should only works with the black border #(id+_popup).
+
+                        $(this).css({display: "none"});
+                        //Returning infobox to its place
+                        $('#' + $(this).attr('id').replace('_popup', '')).css({left: $('#' + $(this).attr('id').replace('_popup', '')).css("--default-left-position")});
+                        $('#' + id + '_popup').children("._modal_popup-content").html("");
+                    });
+                }
+            });
             $('#'+$(this).attr('id')+'_popup').css({display:"block"}); //Open Modal popup
         });
     });
 
     $("._modal_popup").on("click", function (e) {
-
-        if(e.target != this) return; //If clicked on child there is not propagation. It should only works with the black border.
+        if(e.target != this) return; //If clicked on child there is not propagation. It should only works with the black border #(id+_popup).
 
         $(this).css({display:"none"});
+        //Returning infobox to its place
         $('#'+$(this).attr('id').replace('_popup','')).css({left:$('#'+$(this).attr('id').replace('_popup','')).css("--default-left-position")});
     });
 
