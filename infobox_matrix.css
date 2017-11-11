@@ -15,11 +15,13 @@
     --background-theme-color-2: rgba(0,0,0,0.9);
 }
 
+._show_backgrond{
+    background: forestgreen;
+}
 
 ._box_container{
     margin: 1%;
     padding: 0;
-    background: forestgreen;
 }
 
 ._box_container ._infobox{
@@ -199,15 +201,29 @@
 ._modal_popup-content {
     background-color: var(--background-theme-color-1);
     margin: auto;
-    padding: 20px;
+    padding: 40px;
     border: 1px solid var(--secu-theme-color-1);
     width: 80%;
     position: relative;
+    text-align: justify;
 }
 
-._modal_popup img {
+._modal_popup-content h2{
+    margin-bottom: 3%;
+    font-weight: bold;
+}
+
+._modal_popup-content p {
+    font-size: 1.1em !important;
+}
+
+._modal_popup img, iframe {
     max-width: 70%;
     max-height: 50%;
+    display: block;
+    margin: 0px auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 /* The Close Button */
