@@ -201,6 +201,7 @@
 ._modal_popup-content {
     background-color: var(--background-theme-color-1);
     margin: auto;
+    margin-bottom: 100px;
     padding: 40px;
     border: 1px solid var(--secu-theme-color-1);
     width: 80%;

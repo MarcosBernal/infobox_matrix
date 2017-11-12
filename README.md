@@ -7,9 +7,9 @@ Open demo.html to visualize how it works.
 
 Each _infobox is linked to a _modal_popup and a html file by their IDs.
 
-i.e. #name  => #name_popup => #name_htmlfile.html
+i.e. #name  => #name_popup => #name.html
 
-The _infobox div can be placed in any part of the html file. However the _modal_popup div should be declared in the root of the body. The htmlfile should be in a folder.
+The _infobox div can be placed in any part of the html file. However the _modal_popup div should be declared in the root of the body. The html file should be in a folder.
 
 
 # Contributions

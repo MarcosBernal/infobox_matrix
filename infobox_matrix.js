@@ -55,30 +55,31 @@ $(document).ready(function() {
         var id = $(this).attr('id');
         $(this).css({"--default-left-position": $(this).css("left")});
 
+
+
         $(this).animate({left:position}, speed*2, function () {
-            $('#'+id+'_popup').children("._modal_popup-content").load('additional_content/'+id+"_htmlfile.html", function( response, status, xhr ) {
+            if($('html').css('overflow') == 'hidden') {
+                $('html').css('overflow', 'visible');//Allow to scroll again (previously removed)
+                return;
+            }
+            $('#'+id+'_popup').children("._modal_popup-content").load('additional_content/'+id+".html", function( response, status, xhr ) {
                 if ( status == "error" ) {
                     //Error or loading within original html
-                    console.log("<DEBUG> Not "+ id +"_htmlfile.html. Perhaps loading from original html??");
+                    console.log("<DEBUG> Not "+ id +".html. Perhaps loading from original html??");
                     console.log("<DEBUG>: -response:" + response + " -status:" + status + ' -data:' + xhr);
                 }
-                else {
-                    $("._modal_popup-close").on("click", function () {
-                        $(this).parent().parent("._modal_popup").css({display: "none"});
-                        $('#' + id).css({left: $('#' + id).css("--default-left-position")});
-                        $('#' + id + '_popup').children("._modal_popup-content").html("");
-                    });
 
-                    $("._modal_popup").on("click", function (e) {
-                        if (e.target != this) return; //If clicked on child there is not propagation. It should only works with the black border #(id+_popup).
+                //Thi node is loaded from the additional content html file
+                $("._modal_popup-close").on("click", function () {
+                    $(this).parent().parent("._modal_popup").css({display: "none"});
+                    $('#' + id + '_popup').children("._modal_popup-content").html("");
 
-                        $(this).css({display: "none"});
-                        //Returning infobox to its place
-                        $('#' + $(this).attr('id').replace('_popup', '')).css({left: $('#' + $(this).attr('id').replace('_popup', '')).css("--default-left-position")});
-                        $('#' + id + '_popup').children("._modal_popup-content").html("");
-                    });
-                }
+                    $('html').css('overflow', 'visible');//Allow to scroll again (previously removed)
+                    $('#' + id).animate({left: $('#' + id).css("--default-left-position")}, speed*2);
+                });
+
             });
+            $('html').css('overflow', 'hidden'); //Remove the scrolling var of the outside window(html body)
             $('#'+$(this).attr('id')+'_popup').css({display:"block"}); //Open Modal popup
         });
     });
@@ -88,12 +89,10 @@ $(document).ready(function() {
 
         $(this).css({display:"none"});
         //Returning infobox to its place
-        $('#'+$(this).attr('id').replace('_popup','')).css({left:$('#'+$(this).attr('id').replace('_popup','')).css("--default-left-position")});
-    });
 
-    $("._modal_popup-close").on("click", function () {
-        $(this).parent().parent("._modal_popup").css({display:"none"});
-        $('#'+$(this).parent().parent("._modal_popup").attr('id').replace('_popup','')).css({left:$('#'+$(this).parent().parent("._modal_popup").attr('id').replace('_popup','')).css("--default-left-position")});
+        $('html').css('overflow', 'visible');//Allow to scroll again (previously removed)
+        $('#'+$(this).attr('id').replace('_popup','')).animate({left:$('#'+$(this).attr('id').replace('_popup','')).css("--default-left-position")}, speed*2);
+
     });
 
     var callings = 0;
