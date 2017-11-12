@@ -95,6 +95,7 @@ $(document).ready(function() {
 
     });
 
+    var scrolling_timeout;
     var callings = 0;
     $(window).scroll(function() {
         var wH = $(window).height();
@@ -102,25 +103,29 @@ $(document).ready(function() {
 
         callings = callings+1;
 
-        $("._reacting_infobox").each(function(){
-            var hT = $(this).offset().top;
-            var hH = $(this).outerHeight();
-            var original_height = $(this).css('height');
+        clearTimeout(scrolling_timeout);
+        timeout = setTimeout(function() {
+            $("._reacting_infobox").each(function(){
+                var hT = $(this).offset().top;
+                var hH = $(this).outerHeight();
+                var original_height = $(this).css('height');
 
-            if (( wS > (hT+hH*1.2-wH)) & $(this).hasClass("_not_visible")){
-                $(this).removeClass("_not_visible");
-                $(this).animate({'padding':'0'},400);
-                $(this).children("._infobox").animate({'margin':'3%'},400);
-                //alert("Checking: "+ (wS > (hT+hH*1.5-wH)) +  $(this).hasClass("_not_visible") +" hi1 " + $(this).attr('id')+ " callings:" + callings);
-            }
-            else if ( wS < (hT+hH-wH) & !$(this).hasClass("_not_visible")){
-                $(this).addClass("_not_visible");
-                $(this).animate({'padding':'4%'},200);
-                $(this).children("._infobox").animate({'margin':0, 'margin-bottom':'5px'}, 200);
-                //alert("Checking: "+ (wS < (hT+hH-wH)) +  !$(this).hasClass("_not_visible") +" bye " + $(this).attr('id') + " callings:" + callings);
-            }
+                if (( wS > (hT-wH*0.6)) & $(this).hasClass("_not_visible")){
+                    $(this).removeClass("_not_visible");
+                    $(this).animate({'padding':'0'},400);
+                    $(this).children("._infobox").animate({'margin':'3%'},400);
+                    //alert("Checking: "+ (wS > (hT+hH*1.5-wH)) +  $(this).hasClass("_not_visible") +" hi1 " + $(this).attr('id')+ " callings:" + callings);
+                }
+                else if ( wS < (hT-wH*0.65) & !$(this).hasClass("_not_visible")){
+                    $(this).addClass("_not_visible");
+                    $(this).animate({'padding':'4%'},{ duration: 200, queue: false });
+                    $(this).animate({'padding-left':'10%'},{ duration: 200, queue: false });
+                    $(this).children("._infobox").animate({'margin':0, 'margin-bottom':'5px'}, 200);
+                    //alert("Checking: "+ (wS < (hT+hH-wH)) +  !$(this).hasClass("_not_visible") +" bye " + $(this).attr('id') + " callings:" + callings);
+                }
 
-            $(this).css('height',original_height);
-    });
+                $(this).css('height',original_height);
+            },200);
+        });
     });
 });
