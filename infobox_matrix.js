@@ -69,8 +69,10 @@ $(document).ready(function() {
                     console.log("<DEBUG>: -response:" + response + " -status:" + status + ' -data:' + xhr);
                 }
 
-                //Thi node is loaded from the additional content html file
-                $("._modal_popup-close").on("click", function () {
+                $('#'+id+'_popup').children('._modal_popup-content').append('<i class="_modal_popup-close-end fa fa-times fa-2x" ></i>');
+
+                //The node is loaded from the additional content html file
+                $("._modal_popup-close, ._modal_popup-close-end").on("click", function () {
                     $(this).parent().parent("._modal_popup").css({display: "none"});
                     $('#' + id + '_popup').children("._modal_popup-content").html("");
 
@@ -79,8 +81,11 @@ $(document).ready(function() {
                 });
 
             });
+
+            console.log("Adding close span to ",   $(this).attr('id')+'_popup-content', $(this).attr('id')+'_popup');
+
             $('html').css('overflow', 'hidden'); //Remove the scrolling var of the outside window(html body)
-            $('#'+$(this).attr('id')+'_popup').css({display:"block"}); //Open Modal popup
+            $('#'+id+'_popup').css({display:"block"}); //Open Modal popup
         });
     });
 

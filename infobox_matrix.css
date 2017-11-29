@@ -219,12 +219,16 @@
 }
 
 ._modal_popup img, iframe {
-    max-width: 70%;
-    max-height: 50%;
+    max-width: 60%;
+    height: auto;
     display: block;
     margin: 0px auto;
     margin-top: 30px;
     margin-bottom: 30px;
+}
+
+._modal_popup iframe{
+    min-height: 360px;
 }
 
 /* The Close Button */
@@ -237,10 +241,17 @@
     font-weight: bold;
 }
 
-._modal_popup-close:hover, ._modal_popup-close:focus {
+._modal_popup-close:hover, ._modal_popup-close:focus, ._modal_popup-close-end:hover, ._modal_popup-close-end:focus {
     color: var(--text-theme-color-2);
     text-decoration: none;
     cursor: pointer;
+}
+
+/* The Close placed at the end by jquery script */
+._modal_popup-close-end {
+    display: inline-block;
+    width: 100%;
+    text-align:center;
 }
 
 @media only screen and (max-width: 900px) {
@@ -256,6 +267,9 @@
       max-width: 100%;
       max-height: 100%;
 }
+    ._modal_popup-content iframe{
+        min-height: 240px;
+    }
 }
 
 @media only screen and (max-width: 600px) {
@@ -267,5 +281,19 @@
   ._box_container ._infobox ._image_icon img{
       max-width: 150%;
       max-height: 150%;
-}
+    }
+  ._modal_popup {
+      padding-top: 20px;
+  }
+
+  ._modal_popup-content {
+      padding-top: 60px;
+      width: 100%;
+  }
+
+  ._modal_popup-content img, iframe {
+      min-width: 75%;
+      height: auto;
+  }
+
 }
