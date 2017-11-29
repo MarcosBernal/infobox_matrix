@@ -118,7 +118,7 @@ $(document).ready(function() {
                 if (( wS > (hT-wH*0.6)) & $(this).hasClass("_not_visible")){
                     $(this).removeClass("_not_visible");
                     $(this).animate({'padding':'0'},400);
-                    $(this).children("._infobox").animate({'margin':'3%'},400);
+                    $(this).children("._infobox").animate({'margin':'2.5%'},400);
                     //alert("Checking: "+ (wS > (hT+hH*1.5-wH)) +  $(this).hasClass("_not_visible") +" hi1 " + $(this).attr('id')+ " callings:" + callings);
                 }
                 else if ( wS < (hT-wH*0.65) & !$(this).hasClass("_not_visible")){
