@@ -5,13 +5,28 @@ CSS style and jquery script to show a small portfolio.
 
 Open demo.html to visualize how it works.
 
-# Developing
+## Features
 
-Each _infobox is linked to a _modal_popup and a html file by their IDs.
+### Dynamic html loading
+
+Each _infobox is linked by its ID to a _modal_popup and (optionally) to a html file.
 
 i.e. #name  => #name_popup => #name.html
 
-The _infobox div can be placed in any part of the html file. However the _modal_popup div HAS to be declared in the root of the body. The html file should be in a folder.
+The _infobox div can be placed in any part of the html file. However the _modal_popup
+div HAS to be declared in the root of the body. By default, the html file are loaded
+from a folder called 'additional_content'.
+
+### Multilingual support
+
+Using multilingual tools such as [dislines](http://www.danielclemente.com/dislines/) and
+defining the language in the class attribute of the html tag, the plugin support several languages
+under the following rules.
+-> english (default lang)    file.html
+-> language 1 (i.e. Spanish) file.es.html
+-> language 2 (i.e. French)  file.fr.html
+... and so on
+
 
 # How to use it
 
@@ -31,4 +46,4 @@ First is to get the css and js files. You can either add the link(to the last ve
 Many parts of the code have been taken and modified from web sites such as:
 
 - www.w3schools.com
-- stackoverflow.com
+- www.stackoverflow.com

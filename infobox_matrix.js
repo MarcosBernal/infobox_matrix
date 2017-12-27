@@ -40,6 +40,14 @@ $(document).ready(function() {
         }, speed);
     });
 
+    var language;
+    if(typeof language == 'undefined'){
+      if(typeof $('html').attr("lang") == "undefined" || $('html').attr("lang") == "en")
+        language = "";
+      else
+        language = "."+$('html').attr("lang");
+    }
+
 
     /*
      *  When infobox is clicked it is moved to a side of the screen.
@@ -62,10 +70,10 @@ $(document).ready(function() {
                 $('html').css('overflow', 'visible');//Allow to scroll again (previously removed)
                 return;
             }
-            $('#'+id+'_popup').children("._modal_popup-content").load('additional_content/'+id+".html", function( response, status, xhr ) {
+            $('#'+id+'_popup').children("._modal_popup-content").load('additional_content/'+id+language+".html", function( response, status, xhr ) {
                 if ( status == "error" ) {
                     //Error or loading within original html
-                    console.log("<DEBUG> Not "+ id +".html. Perhaps loading from original html??");
+                    console.log("<DEBUG> Not "+ id + language +".html. Perhaps loading from original html??");
                     console.log("<DEBUG>: -response:" + response + " -status:" + status + ' -data:' + xhr);
                 }
 
