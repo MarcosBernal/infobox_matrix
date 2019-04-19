@@ -1,4 +1,4 @@
-(In develoment => limited features if you need a mature modal perhaps you would be interested in the [bootstrap modal plugin](https://www.w3schools.com/bootstrap/bootstrap_modal.asp]))
+In develoment => for a mature altenative check [bootstrap modal plugin](https://www.w3schools.com/bootstrap/bootstrap_modal.asp)
 
 # infobox_matrix plugin
 CSS style and jquery script to show a small portfolio.
@@ -7,7 +7,14 @@ Open demo.html to visualize how it works.
 
 ## Features
 
-### Dynamic html loading
+### Dynamic resizing
+
+Each group of infobox under a div of class **_reacting_infobox** will be compress when it is not
+visualized and it will be expand when some items will be showed. 
+
+The point is to catch the attention of the user. 
+
+### Dynamic html loading (content)
 
 Each _infobox is linked by its ID to a _modal_popup and (optionally) to a html file.
 

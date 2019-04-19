@@ -61,6 +61,9 @@ $(document).ready(function() {
         var position = $(this).offset().left;
         position = $(document).width() - position - $(this).width() -50;
         var id = $(this).attr('id');
+        var html_file_to_load = "additional_content/"+id+language+".html";
+        var popup_etiquette = '#'+id+'_popup';
+
         $(this).css({"--default-left-position": $(this).css("left")});
 
 
@@ -70,30 +73,31 @@ $(document).ready(function() {
                 $('html').css('overflow', 'visible');//Allow to scroll again (previously removed)
                 return;
             }
-            $('#'+id+'_popup').children("._modal_popup-content").load('additional_content/'+id+language+".html", function( response, status, xhr ) {
-                if ( status == "error" ) {
+            console.log("<DEBUG>: Loading: " + html_file_to_load);
+            $(popup_etiquette).children("._modal_popup-content").load(html_file_to_load, function( response, status, xhr ) {
+                if ( status != "success" ) {
                     //Error or loading within original html
-                    console.log("<DEBUG> Not "+ id + language +".html. Perhaps loading from original html??");
+                    console.log("<DEBUG>: Not "+ html_file_to_load +" file found. Perhaps loading from original html??");
                     console.log("<DEBUG>: -response:" + response + " -status:" + status + ' -data:' + xhr);
                 }
+                else {
+                    console.log("<DEBUG>: Successfully loaded");
+                }
 
-                $('#'+id+'_popup').children('._modal_popup-content').append('<i class="_modal_popup-close-end fa fa-times fa-2x" ></i>');
+                $(popup_etiquette).children('._modal_popup-content').append('<i class="_modal_popup-close-end fa fa-times fa-2x" ></i>');
 
                 //The node is loaded from the additional content html file
                 $("._modal_popup-close, ._modal_popup-close-end").on("click", function () {
                     $(this).parent().parent("._modal_popup").css({display: "none"});
-                    $('#' + id + '_popup').children("._modal_popup-content").html("");
+                    $(popup_etiquette).children("._modal_popup-content").html("");
 
                     $('html').css('overflow', 'visible');//Allow to scroll again (previously removed)
                     $('#' + id).animate({left: $('#' + id).css("--default-left-position")}, speed*2);
                 });
 
-            });
-
-            console.log("Adding close span to ",   $(this).attr('id')+'_popup-content', $(this).attr('id')+'_popup');
-
             $('html').css('overflow', 'hidden'); //Remove the scrolling var of the outside window(html body)
             $('#'+id+'_popup').css({display:"block"}); //Open Modal popup
+            });
         });
     });
 
