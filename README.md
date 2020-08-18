@@ -34,6 +34,18 @@ under the following rules.
 -> language 2 (i.e. French)  file.fr.html
 ... and so on
 
+### Infobox analytics
+
+The analytics will be stored in a variable called `read_content_list` and it is an array of objects. Each object contains the following properties:
+
+- start_time: time stored as string in ISO format,
+- duration: measured as milliseconds
+- watch_video: if an iframe with the attribute banner_id was clicked on
+- post_name: name of the post (id)
+
+This variable is update every time an infobox is closed. Data is stored as a variable (not persistant)
+
+
 
 # How to use it
 

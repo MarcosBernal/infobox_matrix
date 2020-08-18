@@ -1,3 +1,6 @@
+let current_post = {}  // Stores the metadata associated to the current open post
+let read_content_list = []
+
 // When DOM has been loaded the function is triggered
 $(document).ready(function() {
     var speed = 200;
@@ -84,6 +87,7 @@ $(document).ready(function() {
                     console.log("<DEBUG>: Successfully loaded");
                 }
 
+                //Adding close span to popup text (at the end), the other comes with additional_content in html
                 $(popup_etiquette).children('._modal_popup-content').append('<i class="_modal_popup-close-end fa fa-times fa-2x" ></i>');
 
                 //The node is loaded from the additional content html file
@@ -93,14 +97,34 @@ $(document).ready(function() {
 
                     $('html').css('overflow', 'visible');//Allow to scroll again (previously removed)
                     $('#' + id).animate({left: $('#' + id).css("--default-left-position")}, speed*2);
+
+                    console.log("<DEBUG>: Close ", id, " to list")
+                    read_content_list.push({
+                        "start_time": current_post["start_time"],
+                        "duration": new Date().getTime() - new Date(current_post["start_time"]).getTime(),
+                        "post_name": current_post["id"],
+                        "watch_video": "watch_video" in current_post
+                    })
+                    current_post = {}
                 });
+            });
+
+            console.log("Open", id, " to list")
+            current_post["id"] = id
+            current_post["start_time"] = new Date().toISOString()
 
             $('html').css('overflow', 'hidden'); //Remove the scrolling var of the outside window(html body)
-            $('#'+id+'_popup').css({display:"block"}); //Open Modal popup
-            });
+            $(popup_etiquette).css({display:"block"}); //Open Modal popup
+
+            // Check if the video is used - https://stackoverflow.com/a/30904449
+            window.addEventListener('blur',function(){
+                if(document.activeElement.getAttribute("banner_id") == $('#'+id+'_popup iframe').attr("banner_id")){
+                    current_post["watch_video"] = true
+                }});
         });
     });
 
+    // Detects if there is a click outside the modal box (in the borders) to close it and restore the previous state
     $("._modal_popup").on("click", function (e) {
         if(e.target != this) return; //If clicked on child there is not propagation. It should only works with the black border #(id+_popup).
 
@@ -110,6 +134,14 @@ $(document).ready(function() {
         $('html').css('overflow', 'visible');//Allow to scroll again (previously removed)
         $('#'+$(this).attr('id').replace('_popup','')).animate({left:$('#'+$(this).attr('id').replace('_popup','')).css("--default-left-position")}, speed*2);
 
+        console.log("<DEBUG>: Close ", $(this).attr('id').replace('_popup',''), " to list")
+        read_content_list.push({
+            "start_time": current_post["start_time"],
+            "duration": new Date().getTime() - new Date(current_post["start_time"]).getTime(),
+            "post_name": current_post["id"],
+            "watch_video": "watch_video" in current_post
+        })
+        current_post = {}
     });
 
     var scrolling_timeout;
